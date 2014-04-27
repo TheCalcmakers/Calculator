@@ -42,5 +42,14 @@ public class Screen {
     }
     public void clearScreen() {
         input.delete(0,1000);
+        output = "";
+    }
+    public void syntaxError() {
+        clearScreen();
+        append("Syntax error!");
+    }
+    public void mathError() {
+        clearScreen();
+        append("Math error!");
     }
 }

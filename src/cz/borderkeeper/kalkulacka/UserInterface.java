@@ -18,21 +18,23 @@ public class UserInterface {
     }
 
     public void load() {
+
+       buttons.add(new Button(this,ButtonType.ONE,0,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.TWO,0,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.THREE,0,2, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.FOUR,1,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.FIVE,1,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.SIX,1,2, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.SEVEN,2,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.EIGHT,2,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.NINE,2,2, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.ZERO,3,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.EQUALS,3,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.CLEAR,3,2, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.PLUS,0,3, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.MINUS,1,3, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.MOD,2,3, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.TIMES,3,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.ONE,0,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.TWO,0,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.THREE,0,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.FIVE,1,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.SIX,1,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.SEVEN,1,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.EIGHT,2,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.NINE,2,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.ZERO,2,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.EQUALS,3,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.CLEAR,3,3, 50,50,Color.YELLOW));
     }
 
     public void draw(Graphics g) {

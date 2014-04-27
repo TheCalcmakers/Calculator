@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         JFrame window = new JFrame("Kalkulačka");
         window.setContentPane(new MainPanel());
