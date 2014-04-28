@@ -30,7 +30,7 @@ public class Button {
         g.setColor(bgColor);
         g.fillRect((int) getX()+1,(int) getY()+1,(int) width-1,(int) height-1);
         g.setColor(Color.BLACK);
-        g.drawString(ButtonType.print(id),(int) (getX()+width/2)-1,(int) (getY()+height/2)-1);
+        g.drawString(ButtonType.print(id),(int) (getX()+width/2-ButtonType.print(id).length()*3)-1,(int) (getY()+height/2)-1);
     }
 
     public void clicked() {
@@ -52,5 +52,8 @@ public class Button {
     }
     public void setBgColor(Color bgColor) {
         this.bgColor = bgColor;
+    }
+    public int getKeyChar() {
+        return ButtonType.print(id).charAt(0);
     }
 }

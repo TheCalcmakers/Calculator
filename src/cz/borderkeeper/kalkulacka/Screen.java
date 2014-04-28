@@ -46,10 +46,12 @@ public class Screen {
     }
     public void syntaxError() {
         clearScreen();
+        output = "";
         append("Syntax error!");
     }
     public void mathError() {
         clearScreen();
+        output = "";
         append("Math error!");
     }
 }

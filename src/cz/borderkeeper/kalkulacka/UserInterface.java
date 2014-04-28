@@ -29,12 +29,23 @@ public class UserInterface {
        buttons.add(new Button(this,ButtonType.EIGHT,2,1, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.NINE,2,2, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.ZERO,3,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.EQUALS,3,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.CLEAR,3,2, 50,50,Color.YELLOW));
+
+       buttons.add(new Button(this,ButtonType.EQUALS,3,2, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.CLEAR,3,3, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.DOT,3,1, 50,50,Color.YELLOW));
+
        buttons.add(new Button(this,ButtonType.PLUS,0,3, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.MINUS,1,3, 50,50,Color.YELLOW));
        buttons.add(new Button(this,ButtonType.MOD,2,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.TIMES,3,3, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.TIMES,3,4, 50,50,Color.YELLOW));
+
+       buttons.add(new Button(this,ButtonType.MEMORYCLEAR,4,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.MEMORYLOAD,4,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.MEMORYSAVE,4,2, 50,50,Color.YELLOW));
+
+       buttons.add(new Button(this,ButtonType.EXP,0,4, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.FACT,1,4, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.SQRT,2,4, 50,50,Color.YELLOW));
     }
 
     public void draw(Graphics g) {

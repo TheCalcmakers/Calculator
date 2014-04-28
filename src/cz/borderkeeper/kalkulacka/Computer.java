@@ -4,65 +4,148 @@ import java.util.ArrayList;
 
 public class Computer {
 
-    private Screen s;
-    private StringBuilder buffer;
+    private Screen s;;
 
-    private char curChar;
-    private char prevChar;
-
-    private enum Operator { PLUS,MINUS,MOD,TIMES,NUMBER,END }
+    private enum Operator { PLUS,MINUS,MOD,TIMES,EXP,NUMBER,END }
     private Operator o;
     private int start;
     private ArrayList<Operator> opList;
     private ArrayList<Double> noList;
 
+    private double memory;
+
     public Computer(Screen s) {
         this.s = s;
-        buffer = new StringBuilder();
+        memory = 0;
     }
 
     public void manager(ButtonType t) {
-        if(ButtonType.getType(t) == 0){
-            start = 0;
-            opList = new ArrayList<Operator>();
-            noList = new ArrayList<Double>();
-            buffer = s.getInput();
-            prevChar = 'x';
+        switch(ButtonType.getType(t)) {
+            case 0:
+                s.print(Double.toString(calculateString()));
+                break;
+            case 1:
+                //Operation +,-,/,*,^
+                add(t);
+                break;
+            case 2:
+                //Clear screen
+                s.clearScreen();
+                break;
+            case 3:
+                //load from Memory
+                s.append(" " + Double.toString(memory));
+                calculateString();
+                break;
+            case 4:
+                //Memory clear
+                memory = 0;
+                s.print("Memory cleared!");
+                break;
+            case 5:
+                //save into Memory
+                memory = calculateString();
+                s.print(Double.toString(memory) + " saved into memory!");
+                break;
+            case 6:
+                //Operation !,sqrt
+                add(t);
+                break;
+            default:
+                add(t);
+        }
+    }
 
-            int stringLength = buffer.length();
-            //Main Loop. Scans the entire input string.
-            for(int i = 0;i < stringLength;i++) {
-                curChar = buffer.charAt(i);
-                //Error handling
-                if((((i==0) | (i==stringLength)) & (getOperator(curChar)!=Operator.NUMBER)) | ((getOperator(curChar)!=Operator.NUMBER) & (getOperator(prevChar)!=Operator.NUMBER))) {
-                    s.syntaxError();
-                    break;
-                }
 
-                //Save values to numbers!
-                o = getOperator(curChar);
-                if((o != Operator.NUMBER) | (i==stringLength-1)) {
-                    if(i==stringLength-1) {
-                        opList.add(Operator.END);
-                        noList.add(getNumber(buffer.subSequence(start, i + 1)));
-                    } else {
-                        opList.add(o);
-                        noList.add(getNumber(buffer.subSequence(start, i)));
-                        start = i+1;
-                    }
-                }
-                prevChar = curChar;
-            }
+    public void add(ButtonType t) {
+        s.append(ButtonType.print(t));
+    }
 
-            //Logic
-            int no;
-            int index = 0;
-            double result;
-            if((no = opList.size()) != noList.size()) {
+    private Operator getOperator(char cs) {
+        switch(cs) {
+            case '+':
+                return Operator.PLUS;
+            case '-':
+                return Operator.MINUS;
+            case '*':
+                return Operator.TIMES;
+            case '/':
+                return Operator.MOD;
+            case '^':
+                return Operator.EXP;
+            default:
+                return Operator.NUMBER;
+        }
+    }
+
+    private double getNumber(CharSequence cs) {
+        for(int i=0;i<cs.length();i++) {
+            if((cs.charAt(i) == '√' & i!=0) | (cs.charAt(i) == '!' & i!=(cs.length()-1))) {
                 s.syntaxError();
-                return;
+                return -1;
             }
-            while(no > 1) {
+        }
+
+        if(cs.charAt(0)=='√') return Math.sqrt(Double.parseDouble(cs.subSequence(1,cs.length()).toString()));
+        if(cs.charAt(cs.length()-1)=='!') return factorial(Integer.parseInt(cs.subSequence(0,cs.length()-1).toString()));
+        return Double.parseDouble(cs.toString());
+    }
+
+    public static int factorial(int n) {
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    public double calculateString() {
+        start = 0;
+        double num;
+        opList = new ArrayList<Operator>();
+        noList = new ArrayList<Double>();
+
+        StringBuilder b = s.getInput();
+        if(b.length()==0) return 0;
+        int stringLength = b.length();
+        //Main Loop. Scans the entire input string.
+        for(int i = 0;i < stringLength;i++) {
+            //Save values to numbers!
+            o = getOperator(b.charAt(i));
+            if((o != Operator.NUMBER) | (i==stringLength-1)) {
+                if(i==stringLength-1) {
+                    opList.add(Operator.END);
+                    if((num = getNumber(b.subSequence(start, i + 1))) == -1) break;
+                    noList.add(num);
+                } else {
+                    opList.add(o);
+                    if((num = getNumber(b.subSequence(start, i))) == -1) break;
+                    noList.add(num);
+                    start = i+1;
+                }
+            }
+        }
+
+        //Logic
+        int no;
+        int index = 0;
+        if((no = opList.size()) != noList.size()) {
+            s.syntaxError();
+            return -1;
+        }
+        //Do the math
+        while(no > 1) {
+            if(opList.get(index) == Operator.EXP) {
+                noList.set(index,Math.pow(noList.get(index),noList.get(index+1)));
+                noList.remove(index+1);
+                opList.remove(index);
+                no = no-1;
+                if(index>0) index--;
+            } else {
+                if(opList.contains(Operator.EXP)) {
+                    if(index<=no) index++;
+                    continue;
+                }
                 if(opList.get(index) == Operator.TIMES) {
                     noList.set(index,noList.get(index)*noList.get(index+1));
                     noList.remove(index+1);
@@ -93,37 +176,7 @@ public class Computer {
                     }
                 }
             }
-
-            s.print(noList.get(0).toString());
-
-        } else if(ButtonType.getType(t) == 2) {
-            s.clearScreen();
-            prevChar = 'x';
-        } else add(t);
-    }
-
-    public void add(ButtonType t) {
-        s.append(ButtonType.print(t));
-    }
-
-    private Operator getOperator(char s) {
-        switch(s) {
-            case '+':
-                return Operator.PLUS;
-            case '-':
-                return Operator.MINUS;
-            case '*':
-                return Operator.TIMES;
-            case '/':
-                return Operator.MOD;
-            default:
-                return Operator.NUMBER;
         }
+        return noList.get(0);
     }
-
-    private double getNumber(CharSequence s) {
-        return Double.parseDouble(s.toString());
-    }
-
-
 }

@@ -1,7 +1,7 @@
 package cz.borderkeeper.kalkulacka;
 
 public enum ButtonType {
-    PLUS,MINUS,TIMES,MOD,EQUALS,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ZERO,CLEAR;
+    PLUS,MINUS,TIMES,MOD,FACT,EXP,SQRT,EQUALS,DOT,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ZERO,CLEAR,MEMORYCLEAR,MEMORYSAVE,MEMORYLOAD;
 
 
     public static int getType(ButtonType id) {
@@ -12,11 +12,21 @@ public enum ButtonType {
             case MINUS:
             case TIMES:
             case MOD:
+            case EXP:
                 return 1;
             case CLEAR:
                 return 2;
-            default:
+            case MEMORYLOAD:
                 return 3;
+            case MEMORYCLEAR:
+                return 4;
+            case MEMORYSAVE:
+                return 5;
+            case FACT:
+            case SQRT:
+                return 6;
+            default:
+                return 7;
         }
     }
 
@@ -32,6 +42,14 @@ public enum ButtonType {
                 return "/";
             case EQUALS:
                 return "=";
+            case DOT:
+                return ".";
+            case FACT:
+                return "!";
+            case EXP:
+                return "^";
+            case SQRT:
+                return "√";
             case ONE:
                 return "1";
             case TWO:
@@ -54,6 +72,12 @@ public enum ButtonType {
                 return "0";
             case CLEAR:
                 return "C";
+            case MEMORYCLEAR:
+                return "MClear";
+            case MEMORYLOAD:
+                return "MLoad";
+            case MEMORYSAVE:
+                return "MSave";
         }
         return "err";
     }

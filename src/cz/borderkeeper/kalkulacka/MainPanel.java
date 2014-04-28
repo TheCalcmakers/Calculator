@@ -20,11 +20,13 @@ public class MainPanel extends JPanel implements KeyListener,MouseListener {
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setFocusable(true);
         requestFocus();
+        requestFocusInWindow();
         init();
     }
     public void addNotify() {
         super.addNotify();
         addMouseListener(this);
+        addKeyListener(this);
     }
     public void init() {
         ui = new UserInterface();
@@ -59,8 +61,24 @@ public class MainPanel extends JPanel implements KeyListener,MouseListener {
     public void mouseEntered(MouseEvent e) {}
     public void mouseExited(MouseEvent e) {}
 
+    Button a;
     public void keyTyped(KeyEvent e) {}
-    public void keyPressed(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+        for(int i = 0;i < ui.getButtons().size();i++) {
+            a = ui.getButtons().get(i);
+            if(e.getKeyChar() == ui.getButtons().get(i).getKeyChar()) {
+                a.setBgColor(Color.BLUE);
+                repaint();
+                a.clicked();
+                break;
+            }
+        }
+    }
+    public void keyReleased(KeyEvent e) {
+        for(int i = 0;i < ui.getButtons().size();i++) {
+            ui.getButtons().get(i).setBgColor(Color.YELLOW);
+        }
+        repaint();
+    }
 
 }
