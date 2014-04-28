@@ -8,13 +8,14 @@ public class Button {
     private double width;
     private double height;
     private Color bgColor;
+    private int margin;
 
     private int row; //on Y coordinate
     private int column; //on X coordinate
 
     private UserInterface ui;
 
-    public Button(UserInterface ui,ButtonType id,int row,int column, int width, int height,Color bgColor) {
+    public Button(UserInterface ui,ButtonType id,int row,int column, int width, int height,Color bgColor, int margin) {
         this.id = id;
         this.row = row;
         this.column = column;
@@ -22,6 +23,7 @@ public class Button {
         this.height = height;
         this.bgColor = bgColor;
         this.ui = ui;
+        this.margin = margin;
     }
 
     public void draw(Graphics g) {
@@ -39,10 +41,10 @@ public class Button {
 
     //Getters and setters
     public double getX() {
-        return ((MainPanel.WIDTH * 0.05)+(62*(column)));
+        return (ui.getScreen().getX()+((ui.getButtonWidth()+margin)*(column)));
     }
     public double getY() {
-        return ((MainPanel.HEIGHT * 0.05)+(62*(row+1)));
+        return (ui.getScreen().getY()+((ui.getButtonHeight()+margin)*(row+1)));
     }
     public double getWidth() {
         return width;

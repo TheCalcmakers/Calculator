@@ -140,7 +140,7 @@ public class Computer {
                 noList.remove(index+1);
                 opList.remove(index);
                 no = no-1;
-                if(index>0) index--;
+                if(index>0) index=0;
             } else {
                 if(opList.contains(Operator.EXP)) {
                     if(index<=no) index++;
@@ -151,13 +151,13 @@ public class Computer {
                     noList.remove(index+1);
                     opList.remove(index);
                     no = no-1;
-                    if(index>0) index--;
+                    if(index>0) index=0;
                 } else if(opList.get(index) == Operator.MOD) {
                     noList.set(index,noList.get(index)/noList.get(index+1));
                     noList.remove(index+1);
                     opList.remove(index);
                     no = no-1;
-                    if(index>0) index--;
+                    if(index>0) index=0;
                 } else {
                     if(opList.contains(Operator.TIMES) | opList.contains(Operator.MOD)) {
                         if(index<=no) index++;

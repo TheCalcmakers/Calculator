@@ -10,42 +10,48 @@ public class UserInterface {
     Computer c;
 
     ArrayList<Button> buttons;
+    private int buttonWidth;
+    private int buttonHeight;
+    private int margin;
 
     public UserInterface() {
         s = new Screen();
         c = new Computer(s);
         buttons = new ArrayList<Button>();
+        buttonWidth = (int) ((s.getWidth() * 0.95) / 5);
+        buttonHeight = (int) ((MainPanel.HEIGHT * 0.75 - s.getHeight()) / 5);
+        margin = 5;
     }
 
     public void load() {
 
-       buttons.add(new Button(this,ButtonType.ONE,0,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.TWO,0,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.THREE,0,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.FOUR,1,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.FIVE,1,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.SIX,1,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.SEVEN,2,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.EIGHT,2,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.NINE,2,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.ZERO,3,0, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.ONE,2,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.TWO,2,1, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.THREE,2,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.FOUR,1,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.FIVE,1,1, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.SIX,1,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.SEVEN,0,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.EIGHT,0,1, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.NINE,0,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.ZERO,3,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
 
-       buttons.add(new Button(this,ButtonType.EQUALS,3,2, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.CLEAR,3,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.DOT,3,1, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.EQUALS,3,4, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.CLEAR,0,3, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.DOT,3,1, buttonWidth,buttonHeight,Color.YELLOW,margin));
 
-       buttons.add(new Button(this,ButtonType.PLUS,0,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.MINUS,1,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.MOD,2,3, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.TIMES,3,4, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.PLUS,2,3, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.MINUS,2,4, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.MOD,1,4, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.TIMES,1,3, buttonWidth,buttonHeight,Color.YELLOW,margin));
 
-       buttons.add(new Button(this,ButtonType.MEMORYCLEAR,4,0, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.MEMORYLOAD,4,1, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.MEMORYSAVE,4,2, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.MEMORYCLEAR,4,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.MEMORYLOAD,4,1, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.MEMORYSAVE,4,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
 
-       buttons.add(new Button(this,ButtonType.EXP,0,4, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.FACT,1,4, 50,50,Color.YELLOW));
-       buttons.add(new Button(this,ButtonType.SQRT,2,4, 50,50,Color.YELLOW));
+       buttons.add(new Button(this,ButtonType.EXP,3,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.FACT,0,4, buttonWidth,buttonHeight,Color.YELLOW,margin));
+       buttons.add(new Button(this,ButtonType.SQRT,3,3, buttonWidth,buttonHeight,Color.YELLOW,margin));
     }
 
     public void draw(Graphics g) {
@@ -66,5 +72,12 @@ public class UserInterface {
     }
     public Computer getComputer() {
         return c;
+    }
+    public int getButtonWidth() {
+        return buttonWidth;
+    }
+
+    public int getButtonHeight() {
+        return buttonHeight;
     }
 }
