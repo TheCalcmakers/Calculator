@@ -86,17 +86,9 @@ public class Computer {
             }
         }
 
-        if(cs.charAt(0)=='√') return Math.sqrt(Double.parseDouble(cs.subSequence(1,cs.length()).toString()));
-        if(cs.charAt(cs.length()-1)=='!') return factorial(Integer.parseInt(cs.subSequence(0,cs.length()-1).toString()));
+        if(cs.charAt(0)=='√') return MathLib.mySqrt(Double.parseDouble(cs.subSequence(1,cs.length()).toString()));
+        if(cs.charAt(cs.length()-1)=='!') return MathLib.factorial(Integer.parseInt(cs.subSequence(0,cs.length()-1).toString()));
         return Double.parseDouble(cs.toString());
-    }
-
-    public static int factorial(int n) {
-        int fact = 1;
-        for (int i = 1; i <= n; i++) {
-            fact *= i;
-        }
-        return fact;
     }
 
     public double calculateString() {
@@ -136,7 +128,7 @@ public class Computer {
         //Do the math
         while(no > 1) {
             if(opList.get(index) == Operator.EXP) {
-                noList.set(index,Math.pow(noList.get(index),noList.get(index+1)));
+                noList.set(index,MathLib.myPow(noList.get(index),noList.get(index+1)));
                 noList.remove(index+1);
                 opList.remove(index);
                 no = no-1;
@@ -147,13 +139,13 @@ public class Computer {
                     continue;
                 }
                 if(opList.get(index) == Operator.TIMES) {
-                    noList.set(index,noList.get(index)*noList.get(index+1));
+                    noList.set(index,MathLib.mul(noList.get(index),noList.get(index+1)));
                     noList.remove(index+1);
                     opList.remove(index);
                     no = no-1;
                     if(index>0) index=0;
                 } else if(opList.get(index) == Operator.MOD) {
-                    noList.set(index,noList.get(index)/noList.get(index+1));
+                    noList.set(index,MathLib.mod((index),(noList.get(index+1))));
                     noList.remove(index+1);
                     opList.remove(index);
                     no = no-1;
@@ -164,12 +156,12 @@ public class Computer {
                         continue;
                     }
                     if(opList.get(index) == Operator.PLUS) {
-                        noList.set(0,noList.get(0)+noList.get(1));
+                        noList.set(0,MathLib.add(noList.get(0),noList.get(1)));
                         noList.remove(1);
                         opList.remove(0);
                         no = no-1;
                     } else if(opList.get(index) == Operator.MINUS) {
-                        noList.set(0,noList.get(0)-noList.get(1));
+                        noList.set(0,MathLib.sub(noList.get(0),noList.get(1)));
                         noList.remove(1);
                         opList.remove(0);
                         no = no-1;

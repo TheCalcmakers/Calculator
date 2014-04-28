@@ -80,5 +80,4 @@ public class MainPanel extends JPanel implements KeyListener,MouseListener {
         }
         repaint();
     }
-
 }
