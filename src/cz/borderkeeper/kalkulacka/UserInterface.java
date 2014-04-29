@@ -2,7 +2,13 @@ package cz.borderkeeper.kalkulacka;
 
 import java.awt.*;
 import java.util.ArrayList;
-
+/*
+ * @author The CalcMakers
+ * @date 22.4.2014
+ * @version 1.0.0
+ *
+ * @note Class handling the UI. Namely holds Screen object and all the buttons. Also passes the screen to Computer.
+ */
 public class UserInterface {
 
     private Color bgColor = Color.RED;
@@ -13,7 +19,10 @@ public class UserInterface {
     private int buttonWidth;
     private int buttonHeight;
     private int margin;
-
+    /*
+    * @brief Constructor called from MainPanel, which creates objects needed for proper function.
+    * @details Creates objects of: Screen, Computer, ArrayList<Button> and also Sets the button size and margin.
+    */
     public UserInterface() {
         s = new Screen();
         c = new Computer(s);
@@ -22,7 +31,10 @@ public class UserInterface {
         buttonHeight = (int) ((MainPanel.HEIGHT * 0.75 - s.getHeight()) / 5);
         margin = 5;
     }
-
+    /*
+    * @brief Simple method, that loads all the Buttons into ArrayList.
+    * @details Loads all the Buttons for them to be rendered later.
+    */
     public void load() {
 
        buttons.add(new Button(this,ButtonType.ONE,2,0, buttonWidth,buttonHeight,Color.YELLOW,margin));
@@ -52,8 +64,14 @@ public class UserInterface {
        buttons.add(new Button(this,ButtonType.EXP,3,2, buttonWidth,buttonHeight,Color.YELLOW,margin));
        buttons.add(new Button(this,ButtonType.FACT,0,4, buttonWidth,buttonHeight,Color.YELLOW,margin));
        buttons.add(new Button(this,ButtonType.SQRT,3,3, buttonWidth,buttonHeight,Color.YELLOW,margin));
-    }
 
+       buttons.add(new Button(this,ButtonType.HELP,6,4,80,30,Color.GREEN,0));
+    }
+    /*
+    * @brief Drawing method.
+    * @details Draws background, then the Screen and then all the buttons.
+    * @param g An object containing all the drawing methods. Is passed down from MainPanel.
+    */
     public void draw(Graphics g) {
         g.setColor(bgColor);
         g.fillRect(0, 0, MainPanel.WIDTH, MainPanel.HEIGHT);
@@ -63,20 +81,33 @@ public class UserInterface {
             buttons.get(i).draw(g);
         }
     }
-
+    /*
+    * @brief Getter for ArrayList<Button>
+    */
     public ArrayList<Button> getButtons() {
         return buttons;
     }
+   /*
+    * @brief Getter for Screen
+    */
     public Screen getScreen() {
         return s;
     }
+   /*
+    * @brief Getter for Computer
+    */
     public Computer getComputer() {
         return c;
     }
+   /*
+    * @brief Getter for buttonWidth
+    */
     public int getButtonWidth() {
         return buttonWidth;
     }
-
+   /*
+    * @brief Getter for buttonHeight
+    */
     public int getButtonHeight() {
         return buttonHeight;
     }

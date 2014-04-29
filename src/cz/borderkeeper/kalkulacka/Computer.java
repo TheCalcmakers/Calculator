@@ -1,10 +1,16 @@
 package cz.borderkeeper.kalkulacka;
 
 import java.util.ArrayList;
-
+/*
+ * @author The CalcMakers
+ * @date 22.4.2014
+ * @version 1.0.0
+ *
+ * @note Class executing the commands set by user. Is able to calculate any string passed to it.
+ */
 public class Computer {
 
-    private Screen s;;
+    private Screen s;
 
     private enum Operator { PLUS,MINUS,MOD,TIMES,EXP,NUMBER,END }
     private Operator o;
@@ -13,12 +19,19 @@ public class Computer {
     private ArrayList<Double> noList;
 
     private double memory;
-
+   /*
+    * @brief Constructor clearing the memory and passing the screen reference object.
+    * @param s Reference screen object.
+    */
     public Computer(Screen s) {
         this.s = s;
         memory = 0;
     }
-
+   /*
+    * @brief Main directory, which decides action taken.
+    * @details This method is called upon button press and depending on the type of button does actions.
+    * @param t Button pressed.
+    */
     public void manager(ButtonType t) {
         switch(ButtonType.getType(t)) {
             case 0:
@@ -56,11 +69,18 @@ public class Computer {
         }
     }
 
-
+   /*
+    * @brief Adds to input string in Screen a char represented by Button.
+    * @param t Type of button.
+    */
     public void add(ButtonType t) {
         s.append(ButtonType.print(t));
     }
 
+   /*
+    * @brief Converts a char to enum Operator.
+    * @param cs char (number or operator)
+    */
     private Operator getOperator(char cs) {
         switch(cs) {
             case '+':
@@ -78,6 +98,12 @@ public class Computer {
         }
     }
 
+   /*
+    * @brief Converts a CharSequence (different string) to a double.
+    * @details Scans for bad characters in the sequence. Automatically calculates square root and factorial. Also can process a delimiter.
+    * @param cs Number beggining with √(sqrt char) or ending with !(factorial char)
+    * @return Calculated double or -1 and ends the process with an error.
+    */
     private double getNumber(CharSequence cs) {
         for(int i=0;i<cs.length();i++) {
             if((cs.charAt(i) == '√' & i!=0) | (cs.charAt(i) == '!' & i!=(cs.length()-1))) {
@@ -91,6 +117,12 @@ public class Computer {
         return Double.parseDouble(cs.toString());
     }
 
+   /*
+    * @brief Converts an input string into result.
+    * @details Splits the input into numbers and operators and puts them into ArrayLists. Then it calculates them.
+    * @see https://www.dropbox.com/s/1w70p9jwvntpwff/calculateString.jpg
+    * @return Calculated double or ends the process.
+    */
     public double calculateString() {
         start = 0;
         double num;

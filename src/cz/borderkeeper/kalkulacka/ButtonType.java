@@ -1,9 +1,20 @@
 package cz.borderkeeper.kalkulacka;
-
+/*
+ * @author The CalcMakers
+ * @date 22.4.2014
+ * @version 1.0.0
+ *
+ * @note Enum holding all the different types of buttons, their type numbers and real life counterparts.
+ */
 public enum ButtonType {
-    PLUS,MINUS,TIMES,MOD,FACT,EXP,SQRT,EQUALS,DOT,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ZERO,CLEAR,MEMORYCLEAR,MEMORYSAVE,MEMORYLOAD;
+    PLUS,MINUS,TIMES,MOD,FACT,EXP,SQRT,EQUALS,DOT,ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,ZERO,CLEAR,MEMORYCLEAR,MEMORYSAVE,MEMORYLOAD,HELP;
 
-
+   /*
+    * @brief Returns a type of a Button, for manager method.
+    * @details 0 execution, 1 binary operators, 2 clear, 3 memoryload, 4 memoryclear, 5 memorysave, 6 unary operators, 7 numbers
+    * @param id Number ID
+    * @return Integer that holds the type.
+    */
     public static int getType(ButtonType id) {
         switch (id) {
             case EQUALS:
@@ -30,6 +41,11 @@ public enum ButtonType {
         }
     }
 
+   /*
+    * @brief Returns a string containing char to display in the UI.
+    * @param id Number ID
+    * @return String containing the correct char(except memory) of the Button.
+    */
     public static String print(ButtonType id) {
         switch (id) {
             case PLUS:
@@ -78,6 +94,8 @@ public enum ButtonType {
                 return "MLoad";
             case MEMORYSAVE:
                 return "MSave";
+            case HELP:
+                return "Help";
         }
         return "err";
     }
